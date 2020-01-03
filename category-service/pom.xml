@@ -10,8 +10,7 @@
     <packaging>war</packaging>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>console-biz</artifactId>
-
+    <artifactId>category-service</artifactId>
 
     <dependencies>
         <dependency>
@@ -22,7 +21,6 @@
     </dependencies>
 
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -30,14 +28,12 @@
                 <version>2.2</version>
                 <configuration>
                     <!-- 指定端口 -->
-                    <port>8101</port>
+                    <port>9101</port>
                     <!-- 请求路径 -->
                     <path>/</path>
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
-
 
 </project>
