@@ -4,6 +4,7 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.mall.category.service.CategoryBackService;
+import top.mall.pojo.category.CategoryBack;
 
 @RequestMapping("/")
 @RestController
@@ -15,5 +16,10 @@ public class TestController {
     @RequestMapping("/test")
     public String hello() {
         return categoryBackService.getCategoryName();
+    }
+
+    @RequestMapping("/category")
+    public CategoryBack getCategory() {
+        return categoryBackService.getCategory();
     }
 }

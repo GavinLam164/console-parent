@@ -12,6 +12,8 @@
         <module>console-biz</module>
         <module>category-service</module>
         <module>category-interface</module>
+        <module>console-dao</module>
+        <module>console-pojo</module>
     </modules>
 
     <properties>
