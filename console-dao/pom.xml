@@ -11,5 +11,12 @@
 
     <artifactId>console-dao</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>top.mall</groupId>
+            <artifactId>console-pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

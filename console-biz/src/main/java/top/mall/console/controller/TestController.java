@@ -6,17 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 import top.mall.category.service.CategoryBackService;
 import top.mall.pojo.category.CategoryBack;
 
-@RequestMapping("/")
+@RequestMapping("/test")
 @RestController
 public class TestController {
 
     @Reference
     private CategoryBackService categoryBackService;
-
-    @RequestMapping("/test")
-    public String hello() {
-        return categoryBackService.getCategoryName();
-    }
 
     @RequestMapping("/category")
     public CategoryBack getCategory() {

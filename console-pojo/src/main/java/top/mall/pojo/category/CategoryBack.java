@@ -59,4 +59,15 @@ public class CategoryBack implements Serializable {
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
+
+    @Override
+    public String toString() {
+        return "CategoryBack{" +
+                "categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
+                ", path='" + path + '\'' +
+                ", state=" + state +
+                ", parentId=" + parentId +
+                '}';
+    }
 }

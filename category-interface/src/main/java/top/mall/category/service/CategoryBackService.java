@@ -5,4 +5,6 @@ import top.mall.pojo.category.CategoryBack;
 public interface CategoryBackService {
     String getCategoryName();
     CategoryBack getCategory();
+
+    void addCategory(CategoryBack category);
 }

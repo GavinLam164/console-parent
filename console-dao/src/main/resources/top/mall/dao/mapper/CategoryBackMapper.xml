@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.mall.dao.mapper.CategoryBackMapper">
+
+    <insert id="insert" parameterType="top.mall.pojo.category.CategoryBack" >
+    insert into m_category_back (category_id, category_name, state, path, parent_id)
+    values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER},
+      #{path,jdbcType=VARCHAR}, #{parentId, jdbcType=INTEGER})
+  </insert>
+</mapper>
