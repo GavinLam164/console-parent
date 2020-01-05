@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="top.mall.dao.mapper.CategoryBackMapper">
-
+    <resultMap id="BaseResultMap" type="top.mall.pojo.category.CategoryBack">
+        <id property="categoryId" column="category_id" jdbcType="INTEGER"/>
+        <result property="categoryName" column="category_name" jdbcType="VARCHAR" />
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="path" column="path" jdbcType="VARCHAR" />
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+    </resultMap>
     <insert id="insert" parameterType="top.mall.pojo.category.CategoryBack" >
     insert into m_category_back (category_id, category_name, state, path, parent_id)
     values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER},
       #{path,jdbcType=VARCHAR}, #{parentId, jdbcType=INTEGER})
   </insert>
+    <select id="findCategoryById" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
+        select * from m_category_back where category_id = #{categoryId}
+    </select>
+
+    <select id="findCategoryListByParentId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select * from m_category_back where parent_id = #{categoryId}
+    </select>
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from m_category_back where category_id = #{categoryId}
+    </delete>
 </mapper>

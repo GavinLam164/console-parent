@@ -7,4 +7,6 @@ public interface CategoryBackService {
     CategoryBack getCategory();
 
     void addCategory(CategoryBack category);
+
+    CategoryBack findCategoryById(Integer categoryId);
 }

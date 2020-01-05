@@ -26,4 +26,8 @@ public class CategoryBackServiceImpl implements CategoryBackService {
     public void addCategory(CategoryBack category) {
         categoryBackMapper.insert(category);
     }
+
+    public CategoryBack findCategoryById(Integer categoryId) {
+        return categoryBackMapper.findCategoryById(categoryId);
+    }
 }

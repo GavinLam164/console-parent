@@ -2,10 +2,7 @@ package top.mall.console.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.mall.category.service.CategoryBackService;
 import top.mall.pojo.category.CategoryBack;
 
@@ -24,6 +21,11 @@ public class CategoryBackController {
         System.out.println("test---" + categoryBack);
         categoryBackService.addCategory(categoryBack);
         return "success";
+    }
+
+    @RequestMapping("/find")
+    public CategoryBack findCategoryById(@Param("categoryId")Integer categoryId) {
+        return categoryBackService.findCategoryById(categoryId);
     }
 
 }
