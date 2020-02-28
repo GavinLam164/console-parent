@@ -5,6 +5,10 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 import top.mall.category.service.CategoryBackService;
 import top.mall.pojo.category.CategoryBack;
+import top.mall.pojo.category.CategoryBackTree;
+import top.mall.pojo.category.RpcResult;
+
+import java.util.List;
 
 @RequestMapping("/category/back")
 @RestController
@@ -14,18 +18,28 @@ public class CategoryBackController {
     private CategoryBackService categoryBackService;
 
     @RequestMapping("/add")
-    public String addCategory(@Param("categoryId")Integer categoryId, @Param("categoryName")String categoryName){
+    public RpcResult addCategory(@Param("parentId")Integer parentId, @Param("categoryName")String categoryName){
         CategoryBack categoryBack = new CategoryBack();
-        categoryBack.setCategoryId(categoryId);
+        categoryBack.setParentId(parentId);
         categoryBack.setCategoryName(categoryName);
-        System.out.println("test---" + categoryBack);
         categoryBackService.addCategory(categoryBack);
-        return "success";
+        return RpcResult.success(null);
     }
 
     @RequestMapping("/find")
-    public CategoryBack findCategoryById(@Param("categoryId")Integer categoryId) {
-        return categoryBackService.findCategoryById(categoryId);
+    public RpcResult<CategoryBack> findCategoryById(@Param("categoryId")Integer categoryId) {
+        return RpcResult.success(categoryBackService.findCategoryById(categoryId));
+    }
+
+
+    @RequestMapping("/findByParentId")
+    public RpcResult<List<CategoryBack>> findCategoryByParentId(@Param("categoryId")Integer categoryId) {
+        return RpcResult.success(categoryBackService.findCategoryByParentId(categoryId));
+    }
+
+    @RequestMapping("/treeList")
+    public RpcResult<List<CategoryBackTree>> treeList() {
+        return RpcResult.success(categoryBackService.findCategoryTree());
     }
 
 }

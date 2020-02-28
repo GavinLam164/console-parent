@@ -8,16 +8,18 @@ public class CategoryBack implements Serializable {
     String path;
     Integer state;
     Integer parentId;
+    Integer level;
 
     public CategoryBack() {
     }
 
-    public CategoryBack(Integer categoryId, String categoryName, String path, Integer state, Integer parentId) {
+    public CategoryBack(Integer categoryId, String categoryName, String path, Integer state, Integer parentId, Integer level) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.path = path;
         this.state = state;
         this.parentId = parentId;
+        this.level = level;
     }
 
     public Integer getCategoryId() {
@@ -58,6 +60,14 @@ public class CategoryBack implements Serializable {
 
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     @Override
