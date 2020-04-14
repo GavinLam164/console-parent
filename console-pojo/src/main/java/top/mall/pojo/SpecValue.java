@@ -1,7 +1,6 @@
 package top.mall.pojo;
 
 import java.io.Serializable;
-import java.util.Enumeration;
 
 public class SpecValue implements Serializable{
     private Integer specValueId;

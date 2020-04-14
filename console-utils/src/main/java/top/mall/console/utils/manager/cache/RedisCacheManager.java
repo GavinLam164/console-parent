@@ -1,4 +1,4 @@
-package top.mall.console.manager.cache;
+package top.mall.console.utils.manager.cache;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

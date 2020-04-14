@@ -1,7 +1,6 @@
 package top.mall.category.service.impl;
 
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import top.mall.category.service.CategoryBackService;
 import top.mall.dao.mapper.CategoryBackMapper;
 import top.mall.pojo.CategoryBack;

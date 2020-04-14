@@ -1,6 +1,5 @@
 package top.mall.product.service;
 
-import org.apache.dubbo.config.annotation.Service;
 import org.apache.ibatis.annotations.Param;
 import top.mall.pojo.SpecSku;
 

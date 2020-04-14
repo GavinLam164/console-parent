@@ -1,12 +1,11 @@
-package top.mall.console.manager.session.impl;
+package top.mall.console.utils.manager.session.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import netscape.javascript.JSObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.mall.console.manager.cache.RedisCacheManager;
-import top.mall.console.manager.session.SessionManager;
+import top.mall.console.utils.manager.cache.RedisCacheManager;
+import top.mall.console.utils.manager.session.SessionManager;
 import top.mall.console.utils.FieldConstant;
 import top.mall.pojo.ConsoleUser;
 

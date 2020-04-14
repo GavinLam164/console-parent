@@ -64,6 +64,6 @@
 <!--        <table tableName="m_sku_price" domainObjectName="SkuPrice" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>-->
 <!--        <table tableName="m_spu_image" domainObjectName="SpuImage" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>-->
         <table tableName="m_console_user" domainObjectName="ConsoleUser" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>
-        <table tableName="m_user" domainObjectName="User" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>
+<!--        <table tableName="m_user" domainObjectName="User" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>-->
     </context>
 </generatorConfiguration>

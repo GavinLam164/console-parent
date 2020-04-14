@@ -1,7 +1,6 @@
 package top.mall.product.service.impl;
 
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import top.mall.dao.mapper.ProductSkuMapper;
 import top.mall.dao.mapper.SpecGroupMapper;
 import top.mall.dao.mapper.SpecSkuMapper;

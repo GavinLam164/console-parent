@@ -1,8 +1,6 @@
 package top.mall.product.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.apache.dubbo.config.annotation.Service;
 import top.mall.dao.mapper.*;
 import top.mall.pojo.*;

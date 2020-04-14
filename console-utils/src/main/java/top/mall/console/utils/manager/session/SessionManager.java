@@ -1,4 +1,4 @@
-package top.mall.console.manager.session;
+package top.mall.console.utils.manager.session;
 
 import top.mall.pojo.ConsoleUser;
 

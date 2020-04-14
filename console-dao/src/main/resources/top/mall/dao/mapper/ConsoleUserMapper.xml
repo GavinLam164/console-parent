@@ -1,90 +1,90 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="top.mall.dao.mapper.ConsoleUserMapper" >
-  <resultMap id="BaseResultMap" type="top.mall.pojo.ConsoleUser" >
-    <constructor >
-      <idArg column="uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="nick_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.mall.dao.mapper.ConsoleUserMapper">
+  <resultMap id="BaseResultMap" type="top.mall.pojo.ConsoleUser">
+    <constructor>
+      <idArg column="uid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nick_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
-    uid, nick_name, phone, password
+  <sql id="Base_Column_List">
+    uid, phone, nick_name, password
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="top.mall.pojo.ConsoleUserKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from m_console_user
     where uid = #{uid,jdbcType=INTEGER}
+      and phone = #{phone,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="top.mall.pojo.ConsoleUserKey">
     delete from m_console_user
     where uid = #{uid,jdbcType=INTEGER}
+      and phone = #{phone,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="top.mall.pojo.ConsoleUser" >
-    insert into m_console_user (uid, nick_name, phone, 
+  <insert id="insert" parameterType="top.mall.pojo.ConsoleUser">
+    insert into m_console_user (uid, phone, nick_name, 
       password)
-    values (#{uid,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+    values (#{uid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="top.mall.pojo.ConsoleUser" >
+  <insert id="insertSelective" parameterType="top.mall.pojo.ConsoleUser">
     insert into m_console_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uid != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
         uid,
       </if>
-      <if test="nickName != null" >
-        nick_name,
-      </if>
-      <if test="phone != null" >
+      <if test="phone != null">
         phone,
       </if>
-      <if test="password != null" >
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="password != null">
         password,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uid != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
         #{uid,jdbcType=INTEGER},
       </if>
-      <if test="nickName != null" >
-        #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
+      <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="top.mall.pojo.ConsoleUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="top.mall.pojo.ConsoleUser">
     update m_console_user
-    <set >
-      <if test="nickName != null" >
+    <set>
+      <if test="nickName != null">
         nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
+      <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
     </set>
     where uid = #{uid,jdbcType=INTEGER}
+      and phone = #{phone,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="top.mall.pojo.ConsoleUser" >
+  <update id="updateByPrimaryKey" parameterType="top.mall.pojo.ConsoleUser">
     update m_console_user
     set nick_name = #{nickName,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=INTEGER}
+      and phone = #{phone,jdbcType=VARCHAR}
   </update>
-  <select id="selectLoginUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectLoginUser" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from m_console_user
-    where phone = #{phone, JdbcType=VARCHAR}
+     where phone = #{phone,jdbcType=VARCHAR}
   </select>
 </mapper>
