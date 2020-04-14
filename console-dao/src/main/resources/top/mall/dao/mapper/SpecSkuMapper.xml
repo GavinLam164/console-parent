@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.mall.dao.mapper.SpecSkuMapper">
+  <resultMap id="BaseResultMap" type="top.mall.pojo.SpecSku">
+    <constructor>
+      <idArg column="sku_spec_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="spec_group_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="spec_group_index" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="spec_value_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="spu_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sku_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    sku_spec_id, spec_group_id, spec_group_index, spec_value_id, spu_id, sku_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from m_spec_sku
+    where sku_spec_id = #{skuSpecId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from m_spec_sku
+    where sku_spec_id = #{skuSpecId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.mall.pojo.SpecSku">
+    insert into m_spec_sku (sku_spec_id, spec_group_id, spec_group_index, 
+      spec_value_id, spu_id, sku_id
+      )
+    values (#{skuSpecId,jdbcType=INTEGER}, #{specGroupId,jdbcType=INTEGER}, #{specGroupIndex,jdbcType=INTEGER}, 
+      #{specValueId,jdbcType=INTEGER}, #{spuId,jdbcType=INTEGER}, #{skuId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="top.mall.pojo.SpecSku">
+    insert into m_spec_sku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuSpecId != null">
+        sku_spec_id,
+      </if>
+      <if test="specGroupId != null">
+        spec_group_id,
+      </if>
+      <if test="specGroupIndex != null">
+        spec_group_index,
+      </if>
+      <if test="specValueId != null">
+        spec_value_id,
+      </if>
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuSpecId != null">
+        #{skuSpecId,jdbcType=INTEGER},
+      </if>
+      <if test="specGroupId != null">
+        #{specGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="specGroupIndex != null">
+        #{specGroupIndex,jdbcType=INTEGER},
+      </if>
+      <if test="specValueId != null">
+        #{specValueId,jdbcType=INTEGER},
+      </if>
+      <if test="spuId != null">
+        #{spuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.mall.pojo.SpecSku">
+    update m_spec_sku
+    <set>
+      <if test="specGroupId != null">
+        spec_group_id = #{specGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="specGroupIndex != null">
+        spec_group_index = #{specGroupIndex,jdbcType=INTEGER},
+      </if>
+      <if test="specValueId != null">
+        spec_value_id = #{specValueId,jdbcType=INTEGER},
+      </if>
+      <if test="spuId != null">
+        spu_id = #{spuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sku_spec_id = #{skuSpecId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.mall.pojo.SpecSku">
+    update m_spec_sku
+    set spec_group_id = #{specGroupId,jdbcType=INTEGER},
+      spec_group_index = #{specGroupIndex,jdbcType=INTEGER},
+      spec_value_id = #{specValueId,jdbcType=INTEGER},
+      spu_id = #{spuId,jdbcType=INTEGER},
+      sku_id = #{skuId,jdbcType=INTEGER}
+    where sku_spec_id = #{skuSpecId,jdbcType=INTEGER}
+  </update>
+  <select id="selectSpecSkuBySpuId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from m_spec_sku
+    where spu_id = #{spuId,jdbcType=INTEGER}
+  </select>
+  <select id="selectSpecSkuBySkuId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from m_spec_sku
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteBySkuId" parameterType="java.lang.Integer" >
+    delete from m_spec_sku
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </delete>
+</mapper>

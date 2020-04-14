@@ -4,7 +4,7 @@
 	<plugins>
 		<!-- com.github.pagehelper 为 PageHelper 类所在包名 -->
 		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<property name="pageNum" value="curPage"/>
 		</plugin>
-
 	</plugins>
 </configuration>

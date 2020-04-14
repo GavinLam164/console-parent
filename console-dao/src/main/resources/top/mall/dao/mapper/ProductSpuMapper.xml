@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.mall.dao.mapper.ProductSpuMapper" >
+  <resultMap id="BaseResultMap" type="top.mall.pojo.ProductSpu" >
+    <constructor >
+      <idArg column="spu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="spu_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="spu_desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="spu_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="category_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="brand_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sale_state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    spu_id, spu_name, spu_desc, spu_price, category_id, brand_id, sale_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from m_product_spu
+    where spu_id = #{spuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from m_product_spu
+    where spu_id = #{spuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.mall.pojo.ProductSpu" useGeneratedKeys="true" keyProperty="spuId">
+    insert into m_product_spu (spu_id, spu_name, spu_desc, 
+      spu_price, category_id, brand_id, 
+      sale_state)
+    values (#{spuId,jdbcType=INTEGER}, #{spuName,jdbcType=VARCHAR}, #{spuDesc,jdbcType=VARCHAR}, 
+      #{spuPrice,jdbcType=DECIMAL}, #{categoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, 
+      #{saleState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="top.mall.pojo.ProductSpu" >
+    insert into m_product_spu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="spuId != null" >
+        spu_id,
+      </if>
+      <if test="spuName != null" >
+        spu_name,
+      </if>
+      <if test="spuDesc != null" >
+        spu_desc,
+      </if>
+      <if test="spuPrice != null" >
+        spu_price,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="saleState != null" >
+        sale_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="spuId != null" >
+        #{spuId,jdbcType=INTEGER},
+      </if>
+      <if test="spuName != null" >
+        #{spuName,jdbcType=VARCHAR},
+      </if>
+      <if test="spuDesc != null" >
+        #{spuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="spuPrice != null" >
+        #{spuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="saleState != null" >
+        #{saleState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.mall.pojo.ProductSpu" >
+    update m_product_spu
+    <set >
+      <if test="spuName != null" >
+        spu_name = #{spuName,jdbcType=VARCHAR},
+      </if>
+      <if test="spuDesc != null" >
+        spu_desc = #{spuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="spuPrice != null" >
+        spu_price = #{spuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="saleState != null" >
+        sale_state = #{saleState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where spu_id = #{spuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.mall.pojo.ProductSpu" >
+    update m_product_spu
+    set spu_name = #{spuName,jdbcType=VARCHAR},
+      spu_desc = #{spuDesc,jdbcType=VARCHAR},
+      spu_price = #{spuPrice,jdbcType=DECIMAL},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      sale_state = #{saleState,jdbcType=INTEGER}
+    where spu_id = #{spuId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="top.mall.pojo.req.SpuListReq">
+    select
+    <include refid="Base_Column_List" />
+    from m_product_spu
+    where spu_id = #{spuId,jdbcType=INTEGER}
+  </select>
+</mapper>

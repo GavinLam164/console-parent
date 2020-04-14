@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.mall.dao.mapper.ProductSpuImageMapper" >
+  <resultMap id="BaseResultMap" type="top.mall.pojo.ProductSpuImage" >
+    <constructor >
+      <idArg column="spu_image_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="spu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="spu_image_path" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="spu_image_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="spu_image_index" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="width" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="height" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="w_h_scale" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    spu_image_id, spu_id, spu_image_path, spu_image_type, spu_image_index, width, height, 
+    w_h_scale
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from m_spu_image
+    where spu_image_id = #{spuImageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from m_spu_image
+    where spu_image_id = #{spuImageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.mall.pojo.ProductSpuImage">
+    insert into m_spu_image (spu_image_id, spu_id, spu_image_path, 
+      spu_image_type, spu_image_index, width, 
+      height, w_h_scale)
+    values (#{spuImageId,jdbcType=INTEGER}, #{spuId,jdbcType=INTEGER}, #{spuImagePath,jdbcType=VARCHAR}, 
+      #{spuImageType,jdbcType=INTEGER}, #{spuImageIndex,jdbcType=INTEGER}, #{width,jdbcType=DOUBLE}, 
+      #{height,jdbcType=DOUBLE}, #{wHScale,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="top.mall.pojo.ProductSpuImage" >
+    insert into m_spu_image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="spuImageId != null" >
+        spu_image_id,
+      </if>
+      <if test="spuId != null" >
+        spu_id,
+      </if>
+      <if test="spuImagePath != null" >
+        spu_image_path,
+      </if>
+      <if test="spuImageType != null" >
+        spu_image_type,
+      </if>
+      <if test="spuImageIndex != null" >
+        spu_image_index,
+      </if>
+      <if test="width != null" >
+        width,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="wHScale != null" >
+        w_h_scale,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="spuImageId != null" >
+        #{spuImageId,jdbcType=INTEGER},
+      </if>
+      <if test="spuId != null" >
+        #{spuId,jdbcType=INTEGER},
+      </if>
+      <if test="spuImagePath != null" >
+        #{spuImagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="spuImageType != null" >
+        #{spuImageType,jdbcType=INTEGER},
+      </if>
+      <if test="spuImageIndex != null" >
+        #{spuImageIndex,jdbcType=INTEGER},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=DOUBLE},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="wHScale != null" >
+        #{wHScale,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.mall.pojo.ProductSpuImage" >
+    update m_spu_image
+    <set >
+      <if test="spuId != null" >
+        spu_id = #{spuId,jdbcType=INTEGER},
+      </if>
+      <if test="spuImagePath != null" >
+        spu_image_path = #{spuImagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="spuImageType != null" >
+        spu_image_type = #{spuImageType,jdbcType=INTEGER},
+      </if>
+      <if test="spuImageIndex != null" >
+        spu_image_index = #{spuImageIndex,jdbcType=INTEGER},
+      </if>
+      <if test="width != null" >
+        width = #{width,jdbcType=DOUBLE},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="wHScale != null" >
+        w_h_scale = #{wHScale,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where spu_image_id = #{spuImageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.mall.pojo.ProductSpuImage" >
+    update m_spu_image
+    set spu_id = #{spuId,jdbcType=INTEGER},
+      spu_image_path = #{spuImagePath,jdbcType=VARCHAR},
+      spu_image_type = #{spuImageType,jdbcType=INTEGER},
+      spu_image_index = #{spuImageIndex,jdbcType=INTEGER},
+      width = #{width,jdbcType=DOUBLE},
+      height = #{height,jdbcType=DOUBLE},
+      w_h_scale = #{wHScale,jdbcType=DOUBLE}
+    where spu_image_id = #{spuImageId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from m_spu_image
+    where spu_id = #{spuId,jdbcType=INTEGER}
+        and spu_image_type = #{spuImageType,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectBySpuId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from m_spu_image
+    where spu_id = #{spuId,jdbcType=INTEGER}
+  </select>
+</mapper>

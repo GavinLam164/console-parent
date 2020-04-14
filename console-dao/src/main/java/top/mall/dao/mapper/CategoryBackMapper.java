@@ -1,13 +1,13 @@
 package top.mall.dao.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import top.mall.pojo.category.CategoryBack;
-import top.mall.pojo.category.CategoryBackTree;
+import top.mall.pojo.CategoryBack;
+import top.mall.pojo.CategoryBackTree;
 
 import java.util.List;
 
 public interface CategoryBackMapper {
+
+
     Integer insert(CategoryBack categoryBack);
 
     void delete(Integer categoryId);

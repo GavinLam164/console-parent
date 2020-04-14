@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.mall.dao.mapper.ProductSkuMapper" >
+  <resultMap id="BaseResultMap" type="top.mall.pojo.ProductSku" >
+    <constructor >
+      <idArg column="sku_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="spu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sku_price" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="sku_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sale_state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sku_id, spu_id, sku_price, sku_code, sale_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from m_product_sku
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from m_product_sku
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.mall.pojo.ProductSku" useGeneratedKeys="true" keyProperty="skuId">
+    insert into m_product_sku (sku_id, spu_id, sku_price, 
+      sku_code, sale_state)
+    values (#{skuId,jdbcType=INTEGER}, #{spuId,jdbcType=INTEGER}, #{skuPrice,jdbcType=DECIMAL}, 
+      #{skuCode,jdbcType=VARCHAR}, #{saleState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="top.mall.pojo.ProductSku" >
+    insert into m_product_sku
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="skuId != null" >
+        sku_id,
+      </if>
+      <if test="spuId != null" >
+        spu_id,
+      </if>
+      <if test="skuPrice != null" >
+        sku_price,
+      </if>
+      <if test="skuCode != null" >
+        sku_code,
+      </if>
+      <if test="saleState != null" >
+        sale_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="skuId != null" >
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="spuId != null" >
+        #{spuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuPrice != null" >
+        #{skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="skuCode != null" >
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="saleState != null" >
+        #{saleState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.mall.pojo.ProductSku" >
+    update m_product_sku
+    <set >
+      <if test="spuId != null" >
+        spu_id = #{spuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuPrice != null" >
+        sku_price = #{skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="skuCode != null" >
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="saleState != null" >
+        sale_state = #{saleState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.mall.pojo.ProductSku" >
+    update m_product_sku
+    set spu_id = #{spuId,jdbcType=INTEGER},
+      sku_price = #{skuPrice,jdbcType=DECIMAL},
+      sku_code = #{skuCode,jdbcType=VARCHAR},
+      sale_state = #{saleState,jdbcType=INTEGER}
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </update>
+  <select id="selectBySpuId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from m_product_sku
+    where   spu_id = #{spuId, jdbcType=INTEGER}
+  </select>
+  <delete id="deleteBySkuId" parameterType="java.lang.Integer" >
+    delete from m_product_sku
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </delete>
+</mapper>

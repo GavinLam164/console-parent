@@ -14,6 +14,11 @@
         <module>category-interface</module>
         <module>console-dao</module>
         <module>console-pojo</module>
+        <module>product-interface</module>
+        <module>product-service</module>
+        <module>user-interface</module>
+        <module>user-service</module>
+        <module>console-utils</module>
     </modules>
 
     <properties>
@@ -115,6 +120,46 @@
             <version>5.1.11</version>
         </dependency>
 
+        <!--Junit单元测试框架-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <!-- Spring-Test是Spring与Junit提供的整合包
+            通过这个组件可以在Junit测试时自动对IOC容器进行初始化
+         -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- 缓存 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.7.2.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.28</version>
+        </dependency>
 
     </dependencies>
+
+
 </project>

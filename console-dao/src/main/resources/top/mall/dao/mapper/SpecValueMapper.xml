@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.mall.dao.mapper.SpecValueMapper" >
+  <resultMap id="BaseResultMap" type="top.mall.pojo.SpecValue" >
+    <constructor >
+      <idArg column="spec_value_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="spec_group_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="spec_value_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="spec_value_index" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    spec_value_id, spec_group_id, spec_value_name, spec_value_index
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from m_spec_value
+    where spec_value_id = #{specValueId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from m_spec_value
+    where spec_value_id = #{specValueId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.mall.pojo.SpecValue" >
+    insert into m_spec_value (spec_value_id, spec_group_id, spec_value_name, 
+      spec_value_index)
+    values (#{specValueId,jdbcType=INTEGER}, #{specGroupId,jdbcType=INTEGER}, #{specValueName,jdbcType=VARCHAR}, 
+      #{specValueIndex,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="top.mall.pojo.SpecValue" >
+    insert into m_spec_value
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="specValueId != null" >
+        spec_value_id,
+      </if>
+      <if test="specGroupId != null" >
+        spec_group_id,
+      </if>
+      <if test="specValueName != null" >
+        spec_value_name,
+      </if>
+      <if test="specValueIndex != null" >
+        spec_value_index,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="specValueId != null" >
+        #{specValueId,jdbcType=INTEGER},
+      </if>
+      <if test="specGroupId != null" >
+        #{specGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="specValueName != null" >
+        #{specValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="specValueIndex != null" >
+        #{specValueIndex,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.mall.pojo.SpecValue" >
+    update m_spec_value
+    <set >
+      <if test="specGroupId != null" >
+        spec_group_id = #{specGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="specValueName != null" >
+        spec_value_name = #{specValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="specValueIndex != null" >
+        spec_value_index = #{specValueIndex,jdbcType=INTEGER},
+      </if>
+    </set>
+    where spec_value_id = #{specValueId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.mall.pojo.SpecValue" >
+    update m_spec_value
+    set spec_group_id = #{specGroupId,jdbcType=INTEGER},
+      spec_value_name = #{specValueName,jdbcType=VARCHAR},
+      spec_value_index = #{specValueIndex,jdbcType=INTEGER}
+    where spec_value_id = #{specValueId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectSpecValueList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from m_spec_value
+  </select>
+</mapper>

@@ -1,4 +1,4 @@
-package top.mall.pojo.category;
+package top.mall.pojo;
 
 public class RpcResult<T> {
     int code;

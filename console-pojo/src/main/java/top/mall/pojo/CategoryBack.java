@@ -1,4 +1,4 @@
-package top.mall.pojo.category;
+package top.mall.pojo;
 
 import java.io.Serializable;
 
