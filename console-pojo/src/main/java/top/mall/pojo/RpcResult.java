@@ -1,6 +1,8 @@
 package top.mall.pojo;
 
-public class RpcResult<T> {
+import java.io.Serializable;
+
+public class RpcResult<T> implements Serializable {
     int code;
     String msg;
     T data;

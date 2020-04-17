@@ -29,7 +29,8 @@
         select * from m_category_back where parent_id = #{categoryId}
     </select>
     <delete id="delete" parameterType="java.lang.Integer">
-        delete from m_category_back where category_id = #{categoryId}
+        delete from m_category_back
+         where category_id = #{categoryId}
     </delete>
 
     <select id="findAllCategory" resultMap="BaseResultTreeMap">
@@ -56,4 +57,9 @@
         </set>
         where category_id = #{categoryId, jdbcType=INTEGER}
     </update>
+
+    <select id="findCategoryByLevel" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select * from m_category_back where level = #{level, jdbcType=INTEGER}
+    </select>
+
 </mapper>

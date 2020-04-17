@@ -120,6 +120,35 @@
     select
     <include refid="Base_Column_List" />
     from m_product_spu
-    where spu_id = #{spuId,jdbcType=INTEGER}
+    where 1=1
+    <if test="spuId != null">
+      and spu_id = #{spuId,jdbcType=INTEGER}
+    </if>
+    <if test="spuName != null and spuName != ''">
+      and spu_name = #{spuName,jdbcType=VARCHAR}
+    </if>
+    <if test="categoryId != null">
+      and category_id = #{categoryId,jdbcType=INTEGER}
+    </if>
+    <if test="skuId != null">
+      and spu_id = (select spu_id from m_product_sku where sku_id = #{skuId,jdbcType=INTEGER})
+    </if>
+    <if test="skuCode != null and skuCode != ''">
+      and spu_id = (select spu_id from m_product_sku where sku_code = #{skuCode,jdbcType=VARCHAR})
+    </if>
+    <if test="saleStates != null and saleStates.size > 0">
+      and sale_state in
+      <foreach collection="saleStates" item="id" index="index" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </if>
   </select>
+  <update id="updateState">
+    update m_product_spu
+    set sale_state = #{saleState,jdbcType=INTEGER}
+    where spu_id in
+    <foreach collection="spuIds" item="id" index="index" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </update>
 </mapper>

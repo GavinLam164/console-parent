@@ -1,5 +1,6 @@
 package top.mall.dao.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import top.mall.pojo.ProductSpu;
 import top.mall.pojo.req.SpuListReq;
 
@@ -19,4 +20,6 @@ public interface ProductSpuMapper {
     int updateByPrimaryKey(ProductSpu record);
 
     List<ProductSpu> selectByParams(SpuListReq spuListReq);
+
+    void updateState(@Param("spuIds")List<Integer> spuIds, @Param("saleState")Integer saleState);
 }

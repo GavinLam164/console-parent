@@ -23,7 +23,11 @@ public class CategoryBackServiceImpl implements CategoryBackService {
     }
 
     public List<CategoryBack> findCategoryByParentId(Integer categoryId) {
-        return categoryBackMapper.findCategoryListByParentId(categoryId);
+        if(categoryId != null) {
+            return categoryBackMapper.findCategoryListByParentId(categoryId);
+        }else {
+            return categoryBackMapper.findCategoryByLevel(1);
+        }
     }
 
     public List<CategoryBackTree> findCategoryTree() {
@@ -41,7 +45,25 @@ public class CategoryBackServiceImpl implements CategoryBackService {
                 father.getSubList().add(c);
             }
         }
+        removeNoLeafCategoryBackTree(treeList, 1);
         return treeList;
+    }
+
+    private void removeNoLeafCategoryBackTree(List<CategoryBackTree> treeList, int level) {
+        if(level == 3){
+            return;
+        }
+        List<Integer> removeIndexList = new ArrayList<Integer>();
+        for(int i = 0 ; i < treeList.size() ; i++){
+            if(treeList.get(i).getSubList().size() == 0) {
+                removeIndexList.add(i);
+            }else {
+                removeNoLeafCategoryBackTree(treeList.get(i).getSubList(), level + 1);
+            }
+        }
+        for (Integer i : removeIndexList){
+            treeList.remove((int)i);
+        }
     }
 
     public void updateState(Integer categoryId, Integer state) {
@@ -66,6 +88,7 @@ public class CategoryBackServiceImpl implements CategoryBackService {
             sb.append(id);
             category.setLevel(1);
         }
+        category.setState(0);
         category.setPath(sb.toString());
         categoryBackMapper.updateSelective(category);
     }

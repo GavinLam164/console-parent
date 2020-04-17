@@ -2,12 +2,11 @@ package top.mall.user.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Service;
-import top.mall.console.utils.CommonException;
-import top.mall.console.utils.FieldConstant;
+import top.mall.console.utils.*;
 import top.mall.console.utils.manager.session.SessionManager;
-import top.mall.console.utils.MD5Utils;
 import top.mall.dao.mapper.ConsoleUserMapper;
 import top.mall.pojo.ConsoleUser;
+import top.mall.pojo.RpcResult;
 import top.mall.user.service.ConsoleUserService;
 
 import javax.annotation.Resource;
@@ -28,16 +27,20 @@ public class ConsoleUserServiceImpl implements ConsoleUserService {
     }
 
     @Override
-    public Map<String, Object> login(ConsoleUser consoleUser) {
+    public RpcResult<Object> login(ConsoleUser consoleUser) {
         ConsoleUser user = consoleUserMapper.selectLoginUser(consoleUser.getPhone());
-        if(StringUtils.isBlank(consoleUser.getPhone())
-                || StringUtils.isBlank(user.getPassword())) { // 请求参数缺少
-
+        if(user == null) {
+            return RpcResult.error(RequestErrorCode.LOGIN_USER_INEXISTENCE, "用户不存在");
         }
-        if(user == null) { // 用户不存在
+        if(StringUtils.isBlank(consoleUser.getPhone())
+                || StringUtils.isBlank(user.getPassword())) {
+            return RpcResult.error(CommonRequestErrorCode.REQUEST_PARAMS_MISSING, "请求参数缺少");
         }
         String password = MD5Utils.digestPassword(consoleUser.getPassword());
-        if(password == null || !password.equals(user.getPassword())) { // 密码错误
+        System.out.println(password);
+        System.out.println(user.getPassword());
+        if(password == null || !password.equals(user.getPassword())) {
+            return RpcResult.error(RequestErrorCode.LOGIN_PASSWORD_ERROR, "用户密码错误");
         }
         String uid = user.getUid().toString();
         String accessToken = MD5Utils.digestPassword(uid);
@@ -49,6 +52,12 @@ public class ConsoleUserServiceImpl implements ConsoleUserService {
         userInfo.setUid(user.getUid());
         map.put("accessToken", accessToken);
         map.put("userInfo", userInfo);
-        return map;
+        return RpcResult.success(map);
+    }
+
+    @Override
+    public RpcResult<Object> logout(String token) {
+        sessionManager.outSession(token);
+        return RpcResult.success(null);
     }
 }

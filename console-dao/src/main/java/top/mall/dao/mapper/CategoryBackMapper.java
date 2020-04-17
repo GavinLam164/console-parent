@@ -19,4 +19,6 @@ public interface CategoryBackMapper {
     List<CategoryBackTree> findAllCategory();
 
     void updateSelective(CategoryBack category);
+
+    List<CategoryBack> findCategoryByLevel(Integer level);
 }

@@ -3,27 +3,28 @@ package top.mall.pojo.req;
 import top.mall.pojo.PageResult;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SpuListReq extends PageResult implements Serializable {
     Integer spuId;
     Integer skuId;
     String spuName;
-    Integer skuCode;
+    String skuCode;
     Integer categoryId;
-    Integer saleState;
+    List<Integer> saleStates;
 
     public SpuListReq() {
         super();
     }
 
-    public SpuListReq(int pages, int total, int curPage, int pageSize, Integer spuId, Integer skuId, String spuName, Integer skuCode, Integer categoryId, Integer saleState) {
+    public SpuListReq(int pages, int total, int curPage, int pageSize, Integer spuId, Integer skuId, String spuName, String skuCode, Integer categoryId, List<Integer> saleStates) {
         super(pages, total, curPage, pageSize, null);
         this.spuId = spuId;
         this.skuId = skuId;
         this.spuName = spuName;
         this.skuCode = skuCode;
         this.categoryId = categoryId;
-        this.saleState = saleState;
+        this.saleStates = saleStates;
     }
 
     public Integer getSpuId() {
@@ -50,11 +51,11 @@ public class SpuListReq extends PageResult implements Serializable {
         this.spuName = spuName;
     }
 
-    public Integer getSkuCode() {
+    public String getSkuCode() {
         return skuCode;
     }
 
-    public void setSkuCode(Integer skuCode) {
+    public void setSkuCode(String skuCode) {
         this.skuCode = skuCode;
     }
 
@@ -66,11 +67,11 @@ public class SpuListReq extends PageResult implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public Integer getSaleState() {
-        return saleState;
+    public List<Integer> getSaleState() {
+        return saleStates;
     }
 
-    public void setSaleState(Integer saleState) {
-        this.saleState = saleState;
+    public void setSaleState( List<Integer> saleStates) {
+        this.saleStates = saleStates;
     }
 }

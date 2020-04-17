@@ -24,4 +24,6 @@ public interface ProductService {
     void spuImageSort(List<SpuImage> spuImageList);
 
     PageResult<ProductSpu> spuList(SpuListReq spuListReq);
+
+    void updateState(List<Integer> spuIds, Integer state);
 }

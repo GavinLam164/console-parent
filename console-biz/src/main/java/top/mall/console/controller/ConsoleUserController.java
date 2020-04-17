@@ -2,15 +2,14 @@ package top.mall.console.controller;
 
 
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.*;
 import top.mall.console.utils.CommonException;
 import top.mall.pojo.ConsoleUser;
 import top.mall.pojo.RpcResult;
 import top.mall.user.service.ConsoleUserService;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,8 +26,16 @@ public class ConsoleUserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public RpcResult<Map<String, Object>> login(@RequestBody ConsoleUser consoleUser) {
-        Map<String, Object> map = consoleUserService.login(consoleUser);
-        return RpcResult.success(map);
+    public RpcResult<Object> login(@RequestBody ConsoleUser consoleUser) {
+        return consoleUserService.login(consoleUser);
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public RpcResult<Object> logout(@RequestHeader HttpHeaders headers) {
+        List<String> tokenValues = headers.get("token");
+        for (String s: tokenValues) {
+            System.out.println(s);
+        }
+        return consoleUserService.logout(tokenValues.get(0));
     }
 }

@@ -19,6 +19,8 @@ public class ProductSpu implements Serializable {
 
     private Integer saleState;
 
+    private ProductSpuImage spuImage;
+
     private List<ProductSpuImage> bannerImageList;
 
     private List<ProductSpuImage> detailImageList;
@@ -107,5 +109,13 @@ public class ProductSpu implements Serializable {
 
     public void setSaleState(Integer saleState) {
         this.saleState = saleState;
+    }
+
+    public ProductSpuImage getSpuImage() {
+        return spuImage;
+    }
+
+    public void setSkuImage(ProductSpuImage spuImage) {
+        this.spuImage = spuImage;
     }
 }

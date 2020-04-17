@@ -29,7 +29,7 @@ public class SessionManagerImpl implements SessionManager {
 
     @Override
     public String validateToken(String token) {
-        String value =  redisCacheManager.get(token);
+        String value = redisCacheManager.get(token);
         if (StringUtils.isNotEmpty(value)) {
             redisCacheManager.set(token, value, FieldConstant.TOKEN_EXPRIE_TIME);
         }
@@ -38,7 +38,8 @@ public class SessionManagerImpl implements SessionManager {
 
     @Override
     public void outSession(String accessToken) {
-        ConsoleUser resp = JSONObject.parseObject(redisCacheManager.get(accessToken),ConsoleUser.class);
+        String json = redisCacheManager.get(accessToken);
+        ConsoleUser resp = JSONObject.parseObject(json,ConsoleUser.class);
         redisCacheManager.del(REDIS_PREFIX_FOR_PT + resp.getUid(),accessToken);
     }
 }
