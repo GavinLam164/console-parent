@@ -2,20 +2,26 @@ package top.mall.pojo;
 
 import java.io.Serializable;
 
-public class SpecValue implements Serializable{
+public class SpecValue implements Serializable {
     private Integer specValueId;
 
     private Integer specGroupId;
+
+    private Integer specGroupIndex;
 
     private String specValueName;
 
     private Integer specValueIndex;
 
-    public SpecValue(Integer specValueId, Integer specGroupId, String specValueName, Integer specValueIndex) {
+    private Integer spuId;
+
+    public SpecValue(Integer specValueId, Integer specGroupId, String specValueName, Integer specValueIndex, Integer spuId, Integer specGroupIndex) {
         this.specValueId = specValueId;
         this.specGroupId = specGroupId;
         this.specValueName = specValueName;
         this.specValueIndex = specValueIndex;
+        this.specGroupIndex = specGroupIndex;
+        this.spuId = spuId;
     }
 
     public SpecValue() {
@@ -72,10 +78,27 @@ public class SpecValue implements Serializable{
         result = 31 * result + (specGroupId != null ? specGroupId.hashCode() : 0);
         result = 31 * result + (specValueName != null ? specValueName.hashCode() : 0);
         result = 31 * result + (specValueIndex != null ? specValueIndex.hashCode() : 0);
+        result = 31 * result + (spuId != null ? spuId.hashCode() : 0);
         return result;
+    }
+
+    public Integer getSpuId() {
+        return spuId;
+    }
+
+    public void setSpuId(Integer spuId) {
+        this.spuId = spuId;
     }
 
     public void setSpecValueIndex(Integer specValueIndex) {
         this.specValueIndex = specValueIndex;
+    }
+
+    public Integer getSpecGroupIndex() {
+        return specGroupIndex;
+    }
+
+    public void setSpecGroupIndex(Integer specGroupIndex) {
+        this.specGroupIndex = specGroupIndex;
     }
 }

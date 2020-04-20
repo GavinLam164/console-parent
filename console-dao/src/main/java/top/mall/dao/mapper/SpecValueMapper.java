@@ -1,5 +1,6 @@
 package top.mall.dao.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import top.mall.pojo.SpecValue;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface SpecValueMapper {
     int updateByPrimaryKey(SpecValue record);
 
     List<SpecValue> selectSpecValueList();
+
+    List<SpecValue> selectBySpuIdAndSpecGroupId(@Param("spuId")Integer spuId,@Param("specGroupId") Integer specGroupId);
+
+    void deleteBySpuId(Integer spuId);
 }

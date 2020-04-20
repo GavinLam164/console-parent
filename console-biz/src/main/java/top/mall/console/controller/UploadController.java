@@ -18,7 +18,7 @@ public class UploadController {
     private String file_server_url;
 
     @RequestMapping("/uploadFile")
-    public RpcResult<> uploadFile(@RequestParam("file") MultipartFile file) {
+    public RpcResult<String> uploadFile(@RequestParam("file") MultipartFile file) {
         System.out.println("上传文件");
         // 获得文件名:
         String fileName = file.getOriginalFilename();

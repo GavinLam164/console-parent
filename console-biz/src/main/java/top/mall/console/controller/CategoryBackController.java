@@ -23,8 +23,8 @@ public class CategoryBackController {
     }
 
     @RequestMapping("/find")
-    public RpcResult<CategoryBack> findCategoryById(@RequestParam("categoryId")Integer categoryId) {
-        return RpcResult.success(categoryBackService.findCategoryById(categoryId));
+    public RpcResult<Object> findCategoryById(@RequestParam("categoryId")Integer categoryId) {
+        return categoryBackService.findCategoryById(categoryId);
     }
 
 

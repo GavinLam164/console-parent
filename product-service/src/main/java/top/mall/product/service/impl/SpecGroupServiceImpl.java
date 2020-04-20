@@ -11,6 +11,8 @@ import top.mall.pojo.SpecValue;
 import top.mall.product.service.SpecGroupService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -38,6 +40,10 @@ public class SpecGroupServiceImpl implements SpecGroupService {
     @Override
     public List<SpecGroup> specGroupListSelectBySpuId(Integer spuId) {
         List<SpecSku> specSkuList = specSkuMapper.selectSpecSkuBySpuId(spuId);
+        System.out.println(specSkuList.size() + "==========================");
+        if(specSkuList.isEmpty()) {
+            return new ArrayList<>();
+        }
         Map<Integer, List<SpecValue>> specValueMap = specSkuList
                 .stream()
                 .map((v) -> specValueMapper.selectByPrimaryKey(v.getSpecValueId()))

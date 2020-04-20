@@ -2,12 +2,13 @@ package top.mall.category.service;
 
 import top.mall.pojo.CategoryBack;
 import top.mall.pojo.CategoryBackTree;
+import top.mall.pojo.RpcResult;
 
 import java.util.List;
 
 public interface CategoryBackService {
 
-    CategoryBack findCategoryById(Integer categoryId);
+    RpcResult findCategoryById(Integer categoryId);
 
     List<CategoryBack> findCategoryByParentId(Integer categoryId);
 

@@ -75,5 +75,4 @@
     <include refid="Base_Column_List" />
     from m_spec_group
   </select>
-
 </mapper>

@@ -31,16 +31,15 @@ public class SpecificationController {
     }
 
     @RequestMapping(value = "/value/add", method = RequestMethod.POST)
-    public RpcResult<Void> valueAdd(
-            @RequestParam("specGroupId") Integer specGroupId,
-            @RequestParam("specValueName") String specValueName,
-            @RequestParam("specValueIndex") Integer specValueIndex
-            ) {
-        SpecValue specValue = new SpecValue(null, specGroupId, specValueName, specValueIndex);
+    public RpcResult<Void> valueAdd(@RequestBody SpecValue specValue) {
         specValueService.valueAdd(specValue);
         return RpcResult.success(null);
     }
 
+    @RequestMapping(value = "/value/list", method = RequestMethod.GET)
+    public RpcResult<List<SpecValue>> valueList(@RequestParam("spuId")Integer spuId, @RequestParam("specGroupId") Integer specGroupId) {
+        return RpcResult.success(specValueService.valueList(spuId, specGroupId));
+    }
     @RequestMapping(value ="/value/del", method = RequestMethod.POST)
     public RpcResult<Void> valueDel(
             @RequestParam("skuId") Integer skuId,

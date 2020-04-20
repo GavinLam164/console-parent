@@ -121,4 +121,8 @@
     delete from m_spec_sku
     where sku_id = #{skuId,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteBySpuId" parameterType="java.lang.Integer" >
+    delete from m_spec_sku
+    where spu_id = #{spuId,jdbcType=INTEGER}
+  </delete>
 </mapper>

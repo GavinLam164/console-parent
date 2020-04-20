@@ -29,7 +29,7 @@
     values (#{skuId,jdbcType=INTEGER}, #{spuId,jdbcType=INTEGER}, #{skuPrice,jdbcType=DECIMAL}, 
       #{skuCode,jdbcType=VARCHAR}, #{saleState,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="top.mall.pojo.ProductSku" >
+  <insert id="insertSelective" parameterType="top.mall.pojo.ProductSku" useGeneratedKeys="true" keyProperty="skuId">
     insert into m_product_sku
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="skuId != null" >

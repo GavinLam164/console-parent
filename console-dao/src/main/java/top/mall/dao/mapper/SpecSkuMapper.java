@@ -22,4 +22,6 @@ public interface SpecSkuMapper {
     List<SpecSku> selectSpecSkuBySkuId(Integer skuId);
 
     void deleteBySkuId(Integer skuId);
+
+    void deleteBySpuId(Integer spuId);
 }

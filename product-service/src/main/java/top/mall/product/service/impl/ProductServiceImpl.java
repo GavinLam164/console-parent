@@ -30,6 +30,7 @@ public class ProductServiceImpl implements ProductService {
     public void spuAdd(ProductSpu spu) {
         spu.setSaleState(0);
         productSpuMapper.insert(spu);
+        System.out.println("插入spu:" + spu.getSpuId());
         this.updateSpuImageList(spu);
     }
 
@@ -130,10 +131,12 @@ public class ProductServiceImpl implements ProductService {
     void updateSpuImageList(ProductSpu spu) {
         spu.getBannerImageList().forEach((v) -> {
             v.setSpuId(spu.getSpuId());
+            v.setSpuImageType(ProductSpuImage.SpuImageType.BANNER.getValue());
             productSpuImageMapper.insert(v);
         });
         spu.getDetailImageList().forEach((v) -> {
             v.setSpuId(spu.getSpuId());
+            v.setSpuImageType(ProductSpuImage.SpuImageType.DETAIL.getValue());
             productSpuImageMapper.insert(v);
         });
     }
