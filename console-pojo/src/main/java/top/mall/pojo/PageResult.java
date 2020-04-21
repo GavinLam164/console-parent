@@ -8,17 +8,17 @@ import java.util.List;
 public class PageResult<T> implements Serializable {
     int pages;
     int total;
-    int curPage;
+    int currentPage;
     int pageSize;
     List<T> list;
 
     public PageResult() {
     }
 
-    public PageResult(int pages, int total, int curPage, int pageSize, List<T> list) {
+    public PageResult(int pages, int total, int currentPage, int pageSize, List<T> list) {
         this.pages = pages;
         this.total = total;
-        this.curPage = curPage;
+        this.currentPage = currentPage;
         this.pageSize = pageSize;
         this.list = list;
     }
@@ -39,12 +39,12 @@ public class PageResult<T> implements Serializable {
         this.total = total;
     }
 
-    public int getCurPage() {
-        return curPage;
+    public int getCurrentPage() {
+        return currentPage;
     }
 
-    public void setCurPage(int curPage) {
-        this.curPage = curPage;
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
     }
 
     public int getPageSize() {

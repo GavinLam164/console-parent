@@ -25,5 +25,7 @@ public interface ProductService {
 
     PageResult<ProductSpu> spuList(SpuListReq spuListReq);
 
-    void updateState(List<Integer> spuIds, Integer state);
+    void spuUpdateState(List<Integer> spuIds, Integer state);
+
+    void skuUpdateState(List<Integer> skuIds, Integer saleState);
 }

@@ -40,7 +40,6 @@ public class SpecGroupServiceImpl implements SpecGroupService {
     @Override
     public List<SpecGroup> specGroupListSelectBySpuId(Integer spuId) {
         List<SpecSku> specSkuList = specSkuMapper.selectSpecSkuBySpuId(spuId);
-        System.out.println(specSkuList.size() + "==========================");
         if(specSkuList.isEmpty()) {
             return new ArrayList<>();
         }

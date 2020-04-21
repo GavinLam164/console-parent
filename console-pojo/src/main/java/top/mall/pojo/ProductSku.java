@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ProductSku implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Integer skuId;
 
     private Integer spuId;
@@ -16,6 +18,17 @@ public class ProductSku implements Serializable {
 
     private List<SpecGroup> specGroupList;
 
+    private SkuImage skuImage;
+
+    public ProductSku(Integer skuId, Integer spuId, Long skuPrice, String skuCode, Integer saleState, SkuImage skuImage) {
+        this.skuId = skuId;
+        this.spuId = spuId;
+        this.skuPrice = skuPrice;
+        this.skuCode = skuCode;
+        this.saleState = saleState;
+        this.skuImage = skuImage;
+    }
+
     public ProductSku(Integer skuId, Integer spuId, Long skuPrice, String skuCode, Integer saleState) {
         this.skuId = skuId;
         this.spuId = spuId;
@@ -26,6 +39,16 @@ public class ProductSku implements Serializable {
 
     public ProductSku() {
         super();
+    }
+
+    public ProductSku(Integer skuId, Integer spuId, Long skuPrice, String skuCode, Integer saleState, List<SpecGroup> specGroupList, SkuImage skuImage) {
+        this.skuId = skuId;
+        this.spuId = spuId;
+        this.skuPrice = skuPrice;
+        this.skuCode = skuCode;
+        this.saleState = saleState;
+        this.specGroupList = specGroupList;
+        this.skuImage = skuImage;
     }
 
     public Integer getSkuId() {
@@ -76,4 +99,11 @@ public class ProductSku implements Serializable {
         this.specGroupList = specGroupList;
     }
 
+    public SkuImage getSkuImage() {
+        return skuImage;
+    }
+
+    public void setSkuImage(SkuImage skuImage) {
+        this.skuImage = skuImage;
+    }
 }

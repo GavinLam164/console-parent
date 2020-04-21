@@ -26,11 +26,16 @@ public class ProductServiceImpl implements ProductService {
     SpecValueMapper specValueMapper;
     @Resource
     SpuImageMapper spuImageMapper;
+    @Resource
+    SkuImageMapper skuImageMapper;
 
     public void spuAdd(ProductSpu spu) {
         spu.setSaleState(0);
-        productSpuMapper.insert(spu);
-        System.out.println("插入spu:" + spu.getSpuId());
+        if(spu.getSpuId() == null) {
+            productSpuMapper.insert(spu);
+        }else {
+            productSpuMapper.updateByPrimaryKeySelective(spu);
+        }
         this.updateSpuImageList(spu);
     }
 
@@ -66,6 +71,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductSku> skuList = productSkuMapper.selectBySpuId(spuId);
         for (ProductSku sku : skuList) {
             sku.setSpecGroupList(map.get(sku.getSkuId()));
+            sku.setSkuImage(skuImageMapper.selectBySkuId(sku.getSkuId()));
         }
         return skuList;
     }
@@ -95,6 +101,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void skuUpdate(List<ProductSku> productSkuList) {
         productSkuList.forEach(v-> {
+            skuImageMapper.deleteBySkuId(v.getSkuId());
+            v.getSkuImage().setSkuId(v.getSkuId());
+            skuImageMapper.insert(v.getSkuImage());
             productSkuMapper.updateByPrimaryKeySelective(v);
         });
     }
@@ -108,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PageResult<ProductSpu> spuList(SpuListReq spuListReq) {
-        PageHelper.startPage(spuListReq.getCurPage(), spuListReq.getPageSize());
+        PageHelper.startPage(spuListReq.getCurrentPage(), spuListReq.getPageSize());
         List<ProductSpu> list = productSpuMapper.selectByParams(spuListReq);
         list.forEach(spu -> {
             spu.setSkuImage(
@@ -118,8 +127,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateState(List<Integer> spuIds, Integer saleState) {
+    public void spuUpdateState(List<Integer> spuIds, Integer saleState) {
         productSpuMapper.updateState(spuIds, saleState);
+    }
+
+    @Override
+    public void skuUpdateState(List<Integer> skuIds, Integer saleState) {
+        productSkuMapper.updateState(skuIds, saleState);
     }
 
     void clearSpuImageList(ProductSpu spu) {
@@ -129,6 +143,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     void updateSpuImageList(ProductSpu spu) {
+        productSpuImageMapper.deleteBySpuId(spu.getSpuId());
         spu.getBannerImageList().forEach((v) -> {
             v.setSpuId(spu.getSpuId());
             v.setSpuImageType(ProductSpuImage.SpuImageType.BANNER.getValue());

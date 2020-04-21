@@ -23,4 +23,6 @@ public interface SpecValueMapper {
     List<SpecValue> selectBySpuIdAndSpecGroupId(@Param("spuId")Integer spuId,@Param("specGroupId") Integer specGroupId);
 
     void deleteBySpuId(Integer spuId);
+
+    List<SpecValue> selectBySpuId(Integer spuId);
 }

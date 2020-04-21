@@ -6,9 +6,9 @@
       <idArg column="spec_value_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="spec_group_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="spec_value_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="spec_group_index" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="spec_value_index" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="spu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="spec_group_index" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -114,5 +114,12 @@
     <include refid="Base_Column_List" />
      FROM m_spec_value
      WHERE spu_id = #{spuId} and spec_group_id = #{specGroupId}
+  </select>
+
+  <select id="selectBySpuId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from m_spec_value
+    where spu_id = #{spuId}
   </select>
 </mapper>

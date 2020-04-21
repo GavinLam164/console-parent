@@ -1,5 +1,6 @@
 package top.mall.dao.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import top.mall.pojo.ProductSku;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface ProductSkuMapper {
     List<ProductSku> selectBySpuId(Integer spuId);
 
     void deleteBySkuId(Integer skuId);
+
+    void updateState(@Param("skuIds") List<Integer> skuIds,@Param("saleState") Integer saleState);
 }

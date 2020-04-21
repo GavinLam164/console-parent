@@ -27,6 +27,10 @@
     delete from m_spu_image
     where spu_image_id = #{spuImageId,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteBySpuId" parameterType="java.lang.Integer" >
+    delete from m_spu_image
+    where spu_id = #{spuId,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="top.mall.pojo.ProductSpuImage">
     insert into m_spu_image (spu_image_id, spu_id, spu_image_path, 
       spu_image_type, spu_image_index, width, 

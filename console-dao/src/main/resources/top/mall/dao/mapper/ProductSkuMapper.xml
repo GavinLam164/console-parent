@@ -92,6 +92,15 @@
       sale_state = #{saleState,jdbcType=INTEGER}
     where sku_id = #{skuId,jdbcType=INTEGER}
   </update>
+  <update id="updateState" parameterType="top.mall.pojo.ProductSku" >
+    update m_product_sku
+    set sale_state = #{saleState,jdbcType=INTEGER}
+    where sku_id in
+     <foreach collection="skuIds" item="id" index="index" open="(" close=")" separator=",">
+       #{id}
+     </foreach>
+  </update>
+
   <select id="selectBySpuId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
     <include refid="Base_Column_List"/>

@@ -42,10 +42,10 @@ public class SpecificationController {
     }
     @RequestMapping(value ="/value/del", method = RequestMethod.POST)
     public RpcResult<Void> valueDel(
-            @RequestParam("skuId") Integer skuId,
+            @RequestParam("spuId") Integer spuId,
             @RequestParam("specValueId") Integer specValueId
     ) {
-        specValueService.valueDel(skuId, specValueId);
+        specValueService.valueDel(spuId, specValueId);
         return RpcResult.success(null);
     }
 }

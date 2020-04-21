@@ -21,4 +21,6 @@ public interface ProductSpuImageMapper {
     List<ProductSpuImage> selectByType(@Param("spuId")Integer spuId, @Param("spuImageType") Integer spuImageType);
 
     List<ProductSpuImage> selectBySpuId(@Param("spuId")Integer spuId);
+
+    void deleteBySpuId(Integer spuId);
 }

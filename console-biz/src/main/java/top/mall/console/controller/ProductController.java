@@ -33,8 +33,14 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/spu/updateState", method = RequestMethod.POST)
-    public RpcResult<Void> updateState(@RequestParam("spuIds") List<Integer> spuIds, @RequestParam("saleState")Integer saleState) {
-        productService.updateState(spuIds, saleState);
+    public RpcResult<Void> spuUpdateState(@RequestParam("spuIds") List<Integer> spuIds, @RequestParam("saleState")Integer saleState) {
+        productService.spuUpdateState(spuIds, saleState);
+        return RpcResult.success(null);
+    }
+
+    @RequestMapping(value = "/sku/updateState", method = RequestMethod.POST)
+    public RpcResult<Void> skuUpdateState(@RequestParam("skuIds") List<Integer> skuIds, @RequestParam("saleState")Integer saleState) {
+        productService.skuUpdateState(skuIds, saleState);
         return RpcResult.success(null);
     }
 
