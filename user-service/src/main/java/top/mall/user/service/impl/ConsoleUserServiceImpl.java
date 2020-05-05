@@ -37,8 +37,6 @@ public class ConsoleUserServiceImpl implements ConsoleUserService {
             return RpcResult.error(CommonRequestErrorCode.REQUEST_PARAMS_MISSING, "请求参数缺少");
         }
         String password = MD5Utils.digestPassword(consoleUser.getPassword());
-        System.out.println(password);
-        System.out.println(user.getPassword());
         if(password == null || !password.equals(user.getPassword())) {
             return RpcResult.error(RequestErrorCode.LOGIN_PASSWORD_ERROR, "用户密码错误");
         }

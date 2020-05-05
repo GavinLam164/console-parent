@@ -92,4 +92,10 @@
       password = #{password,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
+  <select id="selectLoginUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from m_user
+    where phone = #{phone,jdbcType=VARCHAR}
+  </select>
 </mapper>

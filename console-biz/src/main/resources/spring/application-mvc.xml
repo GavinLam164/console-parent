@@ -31,8 +31,8 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/console/user/login"/>
             <mvc:exclude-mapping path="/console/user/regist"/>
-            <mvc:exclude-mapping path="/console/user/logout"/>
-            <mvc:exclude-mapping path="/upload/uploadFile"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/regist"/>
             <bean class="top.mall.console.interceptor.LoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>

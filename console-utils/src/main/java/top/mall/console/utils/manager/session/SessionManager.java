@@ -4,7 +4,7 @@ import top.mall.pojo.ConsoleUser;
 
 public interface SessionManager {
 
-    void setSession(String key, ConsoleUser user, int timeout, String userId);
+    void setSession(String key, Object user, int timeout, String userId);
 
     String validateToken(String token);
 
