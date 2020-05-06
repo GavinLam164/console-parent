@@ -9,6 +9,25 @@ public class CategoryBack implements Serializable {
     Integer state;
     Integer parentId;
     Integer level;
+    String image;
+
+    public CategoryBack(Integer categoryId, String categoryName, String path, Integer state, Integer parentId, Integer level, String image) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.path = path;
+        this.state = state;
+        this.parentId = parentId;
+        this.level = level;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public CategoryBack() {
     }

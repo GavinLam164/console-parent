@@ -22,4 +22,6 @@ public interface ProductSpuMapper {
     List<ProductSpu> selectByParams(SpuListReq spuListReq);
 
     void updateState(@Param("spuIds")List<Integer> spuIds, @Param("saleState")Integer saleState);
+
+    List<ProductSpu> findSelectSpuList(@Param("ids")List<Integer> ids);
 }

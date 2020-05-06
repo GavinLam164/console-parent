@@ -16,5 +16,5 @@ public interface CategoryBackService {
 
     void updateState(Integer categoryId, Integer state);
 
-    void addCategory(Integer parentId, String categoryName);
+    void addCategory(Integer parentId, String categoryName, String image);
 }

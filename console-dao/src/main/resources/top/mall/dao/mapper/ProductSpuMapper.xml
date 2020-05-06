@@ -151,4 +151,14 @@
       #{id}
     </foreach>
   </update>
+  <select id="findSelectSpuList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from m_product_spu
+    where spu_id in
+    <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+
 </mapper>

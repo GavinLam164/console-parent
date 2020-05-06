@@ -17,8 +17,10 @@ public class CategoryBackController {
     private CategoryBackService categoryBackService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public RpcResult<Void> addCategory(@RequestParam(value = "parentId", required = false)Integer parentId, @RequestParam("categoryName")String categoryName){
-        categoryBackService.addCategory(parentId, categoryName);
+    public RpcResult<Void> addCategory(@RequestParam(value = "parentId", required = false)Integer parentId,
+                                       @RequestParam("categoryName")String categoryName,
+                                       @RequestParam("image")String image){
+        categoryBackService.addCategory(parentId, categoryName, image);
         return RpcResult.success(null);
     }
 

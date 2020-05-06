@@ -20,6 +20,11 @@
         </dependency>
         <dependency>
             <groupId>top.mall</groupId>
+            <artifactId>console-utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>top.mall</groupId>
             <artifactId>console-dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

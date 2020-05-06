@@ -7,6 +7,7 @@
         <result property="state" column="state" jdbcType="INTEGER"/>
         <result property="path" column="path" jdbcType="VARCHAR" />
         <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="image" column="image" jdbcType="VARCHAR"/>
     </resultMap>
     <resultMap id="BaseResultTreeMap" type="top.mall.pojo.CategoryBackTree">
         <id property="categoryId" column="category_id" jdbcType="INTEGER"/>
@@ -14,12 +15,13 @@
         <result property="state" column="state" jdbcType="INTEGER"/>
         <result property="path" column="path" jdbcType="VARCHAR" />
         <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="image" column="image" jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="insert" parameterType="top.mall.pojo.CategoryBack"
             useGeneratedKeys="true" keyProperty="categoryId">
-    insert into m_category_back (category_id, category_name, path, parent_id)
+    insert into m_category_back (category_id, category_name, path, parent_id, image)
     values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR},
-      #{path,jdbcType=VARCHAR}, #{parentId, jdbcType=INTEGER})
+      #{path,jdbcType=VARCHAR}, #{parentId, jdbcType=INTEGER}, #{image,jdbcType=VARCHAR})
   </insert>
     <select id="findCategoryById" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
         select * from m_category_back where category_id = #{categoryId}
@@ -53,6 +55,9 @@
             </if>
             <if test="state != null">
                 state = #{state, jdbcType=INTEGER},
+            </if>
+            <if test="image != null">
+                image = #{image, jdbcType=INTEGER},
             </if>
         </set>
         where category_id = #{categoryId, jdbcType=INTEGER}

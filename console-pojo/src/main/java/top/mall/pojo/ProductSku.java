@@ -20,6 +20,16 @@ public class ProductSku implements Serializable {
 
     private SkuImage skuImage;
 
+    private ProductSpu productSpu;
+
+    public ProductSpu getProductSpu() {
+        return productSpu;
+    }
+
+    public void setProductSpu(ProductSpu productSpu) {
+        this.productSpu = productSpu;
+    }
+
     public ProductSku(Integer skuId, Integer spuId, Long skuPrice, String skuCode, Integer saleState, SkuImage skuImage) {
         this.skuId = skuId;
         this.spuId = spuId;

@@ -79,10 +79,11 @@ public class CategoryBackServiceImpl implements CategoryBackService {
         categoryBackMapper.updateSelective(category);
     }
 
-    public void addCategory(Integer parentId, String categoryName) {
+    public void addCategory(Integer parentId, String categoryName, String image) {
         CategoryBack category = new CategoryBack();
         category.setParentId(parentId);
         category.setCategoryName(categoryName);
+        category.setImage(image);
         categoryBackMapper.insert(category);
         Integer id = category.getCategoryId();
         StringBuffer sb = new StringBuffer();
