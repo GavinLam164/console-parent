@@ -9,7 +9,9 @@ import top.mall.product.service.CartService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,33 +25,76 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void addCart(ProductSku productSku, String token) {
+        List<ProductSku> skuList = getRedisProductSku(token);
+        productSku.createCartId();
+        skuList.add(productSku);
+        setRedisProductSku(token, skuList);
+    }
+
+    public List<ProductSku> getRedisProductSku(String token){
         String cartJson = redisCacheManager.get("cart:" + token);
         List<ProductSku> skuList = JSON.parseArray(cartJson, ProductSku.class);
         if(skuList == null) {
             skuList = new ArrayList<>();
         }
-        skuList.add(productSku);
+        return skuList;
+    }
+
+    public void setRedisProductSku(String token, List<ProductSku> skuList) {
         redisCacheManager.set("cart:" + token, JSON.toJSONString(skuList));
     }
 
     @Override
-    public List<ProductSku> cartList(String token) {
-        String cartJson = redisCacheManager.get("cart:" + token);
-        List<ProductSku> skuList = JSON.parseArray(cartJson, ProductSku.class);
+    public Map cartList(String token) {
+        List<ProductSku> skuList = getRedisProductSku(token);
         skuList.forEach(sku -> {
             sku.setProductSpu(productSpuMapper.selectByPrimaryKey(sku.getSpuId()));
         });
-        return skuList;
+        Map<String, Object> map = new HashMap<>();
+        List<ProductSku> collect = skuList.stream().filter(productSku -> productSku.isSelected()).collect(Collectors.toList());
+        long totalPrice = 0;
+        for(ProductSku sku: collect){
+            totalPrice+=sku.getSkuPrice();
+        }
+        map.put("totalPrice", totalPrice);
+        map.put("skuList", skuList);
+        return map;
     }
 
     @Override
-    public void deleteCart(String token, List<Integer> skuIds) {
-        String cartJson = redisCacheManager.get("cart:" + token);
-        List<ProductSku> skuList = JSON.parseArray(cartJson, ProductSku.class);
-        if(skuList == null) {
-            return;
+    public void deleteCart(String token, List<String> cartIds) {
+        List<ProductSku> skuList = getRedisProductSku(token);
+        List<ProductSku> res = skuList.stream().filter(v -> cartIds.indexOf(v.getCartId()) == -1).collect(Collectors.toList());
+        setRedisProductSku(token, res);
+    }
+
+    @Override
+    public void select(String token, List<String> cartIds) {
+        List<ProductSku> skuList = getRedisProductSku(token);
+        skuList.forEach(v -> {
+            if(cartIds.indexOf(v.getCartId()) != -1) {
+                v.setSelected(true);
+            }else {
+                v.setSelected(false);
+            }
+        });
+        setRedisProductSku(token, skuList);
+    }
+
+    @Override
+    public Map selectList(String token) {
+        List<ProductSku> skuList = getRedisProductSku(token);
+        skuList.forEach(sku -> {
+            sku.setProductSpu(productSpuMapper.selectByPrimaryKey(sku.getSpuId()));
+        });
+        Map<String, Object> map = new HashMap<>();
+        List<ProductSku> collect = skuList.stream().filter(productSku -> productSku.isSelected()).collect(Collectors.toList());
+        long totalPrice = 0;
+        for(ProductSku sku: collect){
+            totalPrice+=sku.getSkuPrice();
         }
-        List<ProductSku> res = skuList.stream().filter(v -> skuIds.indexOf(v.getSkuId()) == -1).collect(Collectors.toList());
-        redisCacheManager.set("cart:" + token, JSON.toJSONString(res));
+        map.put("totalPrice", totalPrice);
+        map.put("skuList", collect);
+        return map;
     }
 }

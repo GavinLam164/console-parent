@@ -2,6 +2,7 @@ package top.mall.pojo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 public class ProductSku implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -21,6 +22,30 @@ public class ProductSku implements Serializable {
     private SkuImage skuImage;
 
     private ProductSpu productSpu;
+
+    private boolean selected;
+
+    private String cartId;
+
+    public void createCartId() {
+        this.cartId = UUID.randomUUID().toString();
+    }
+
+    public String getCartId() {
+        return this.cartId;
+    }
+
+    public void setCartId(String cartId) {
+        this.cartId = cartId;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public ProductSpu getProductSpu() {
         return productSpu;
