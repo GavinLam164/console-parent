@@ -10,4 +10,6 @@ public interface UserService {
     RpcResult<Object> login(User user);
 
     RpcResult<Object> logout(String token);
+
+    Object getBasicInfo(String token);
 }

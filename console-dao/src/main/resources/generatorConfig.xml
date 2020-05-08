@@ -66,6 +66,8 @@
 <!--        <table tableName="m_console_user" domainObjectName="ConsoleUser" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>-->
 <!--        <table tableName="m_user" domainObjectName="User" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>-->
 <!--        <table tableName="m_sku_image" domainObjectName="SkuImage" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>-->
-        <table tableName="m_home_config" domainObjectName="HomeConfig" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>
+<!--        <table tableName="m_home_config" domainObjectName="HomeConfig" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>-->
+<!--        <table tableName="m_area" domainObjectName="Area" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>-->
+        <table tableName="m_user_address" domainObjectName="Address" selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableCountByExample="false"/>
     </context>
 </generatorConfiguration>

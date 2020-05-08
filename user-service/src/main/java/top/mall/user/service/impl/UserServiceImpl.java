@@ -1,5 +1,6 @@
 package top.mall.user.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -7,6 +8,7 @@ import top.mall.console.utils.CommonRequestErrorCode;
 import top.mall.console.utils.FieldConstant;
 import top.mall.console.utils.MD5Utils;
 import top.mall.console.utils.RequestErrorCode;
+import top.mall.console.utils.manager.cache.RedisCacheManager;
 import top.mall.console.utils.manager.session.SessionManager;
 import top.mall.dao.mapper.ConsoleUserMapper;
 import top.mall.dao.mapper.UserMapper;
@@ -25,6 +27,8 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
     @Resource(name = "mSessionManager")
     SessionManager mSessionManager;
+    @Resource
+    RedisCacheManager redisCacheManager;
     @Override
     public void regist(User user) {
         user.setPassword(MD5Utils.digestPassword(user.getPassword()));
@@ -63,5 +67,11 @@ public class UserServiceImpl implements UserService {
     public RpcResult<Object> logout(String token) {
         mSessionManager.outSession(token);
         return RpcResult.success(null);
+    }
+
+    @Override
+    public Object getBasicInfo(String token) {
+        String json = redisCacheManager.get(token);
+        return JSON.parseObject(json, User.class);
     }
 }
