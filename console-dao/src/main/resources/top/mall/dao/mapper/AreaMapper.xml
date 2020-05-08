@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.mall.dao.mapper.AreaMapper" >
+  <resultMap id="BaseResultMap" type="top.mall.pojo.Area" >
+    <constructor >
+      <idArg column="area_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="area_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="area_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="parent_area_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="area_name_path" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="area_id_path" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="BaseResultTreeMap" type="top.mall.pojo.AreaTree" >
+    <constructor >
+      <idArg column="area_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="area_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="area_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="parent_area_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="area_name_path" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="area_id_path" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    area_id, area_code, area_name, parent_area_id, area_name_path, area_id_path
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from m_area
+    where area_id = #{areaId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from m_area
+    where area_id = #{areaId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="top.mall.pojo.Area" >
+    insert into m_area (area_id, area_code, area_name, 
+      parent_area_id, area_name_path, area_id_path
+      )
+    values (#{areaId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, 
+      #{parentAreaId,jdbcType=VARCHAR}, #{areaNamePath,jdbcType=VARCHAR}, #{areaIdPath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="top.mall.pojo.Area" >
+    insert into m_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaCode != null" >
+        area_code,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="parentAreaId != null" >
+        parent_area_id,
+      </if>
+      <if test="areaNamePath != null" >
+        area_name_path,
+      </if>
+      <if test="areaIdPath != null" >
+        area_id_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentAreaId != null" >
+        #{parentAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNamePath != null" >
+        #{areaNamePath,jdbcType=VARCHAR},
+      </if>
+      <if test="areaIdPath != null" >
+        #{areaIdPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.mall.pojo.Area" >
+    update m_area
+    <set >
+      <if test="areaCode != null" >
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentAreaId != null" >
+        parent_area_id = #{parentAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNamePath != null" >
+        area_name_path = #{areaNamePath,jdbcType=VARCHAR},
+      </if>
+      <if test="areaIdPath != null" >
+        area_id_path = #{areaIdPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where area_id = #{areaId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.mall.pojo.Area" >
+    update m_area
+    set area_code = #{areaCode,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      parent_area_id = #{parentAreaId,jdbcType=VARCHAR},
+      area_name_path = #{areaNamePath,jdbcType=VARCHAR},
+      area_id_path = #{areaIdPath,jdbcType=VARCHAR}
+    where area_id = #{areaId,jdbcType=VARCHAR}
+  </update>
+  <select id="findAllArea" resultMap="BaseResultTreeMap">
+    select * from m_area
+  </select>
+</mapper>
