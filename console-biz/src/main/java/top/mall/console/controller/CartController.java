@@ -39,9 +39,8 @@ public class CartController {
     }
 
     @RequestMapping(value = "/delete")
-    public RpcResult<List<ProductSku>> deleteCart(@RequestHeader("token") String token,
-                                                  @RequestParam("cartIds") List<String> cartIds) {
-        cartService.deleteCart(token, cartIds);
+    public RpcResult<List<ProductSku>> deleteCart(@RequestHeader("token") String token) {
+        cartService.deleteCart(token);
         return RpcResult.success(null);
     }
 

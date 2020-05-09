@@ -62,9 +62,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void deleteCart(String token, List<String> cartIds) {
+    public void deleteCart(String token) {
         List<ProductSku> skuList = getRedisProductSku(token);
-        List<ProductSku> res = skuList.stream().filter(v -> cartIds.indexOf(v.getCartId()) == -1).collect(Collectors.toList());
+        List<ProductSku> res = skuList.stream().filter(v -> !v.isSelected()).collect(Collectors.toList());
         setRedisProductSku(token, res);
     }
 

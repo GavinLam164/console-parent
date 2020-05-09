@@ -10,7 +10,7 @@ public interface CartService {
 
     Map cartList(String token);
 
-    void deleteCart(String token, List<String> cartIds);
+    void deleteCart(String token);
 
     void select(String token, List<String> cartIds);
 
