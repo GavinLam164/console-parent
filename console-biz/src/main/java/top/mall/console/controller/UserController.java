@@ -54,6 +54,22 @@ public class UserController {
         return RpcResult.success(areaService.currentSelectAddress(token));
     }
 
+    @RequestMapping("/addressList")
+    public RpcResult<List<Map>> addressList(@RequestHeader("token") String token) {
+        return RpcResult.success(areaService.addressList(token));
+    }
+
+    @RequestMapping("/setSelectAddress")
+    public RpcResult setSelectAddress(@RequestHeader("token") String token, @RequestParam("addressId")Integer addressId) {
+        areaService.setSelectAddress(token, addressId);
+        return RpcResult.success(null);
+    }
+
+    @RequestMapping("/addressDetail")
+    public RpcResult<Map> addressDetail(@RequestParam("addressId") Integer addressId) {
+        return RpcResult.success(areaService.addressDetail(addressId));
+    }
+
     @RequestMapping("/getBasicInfo")
     public RpcResult<Object> getBasicInfo(@RequestHeader("token")String token) {
         return RpcResult.success(consoleUserService.getBasicInfo(token));

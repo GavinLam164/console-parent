@@ -1,6 +1,9 @@
 package top.mall.dao.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import top.mall.pojo.Address;
+
+import java.util.List;
 
 public interface AddressMapper {
     int deleteByPrimaryKey(Integer addressId);
@@ -15,5 +18,7 @@ public interface AddressMapper {
 
     int updateByPrimaryKey(Address record);
 
-    Address selectByUid(Integer uid);
+    List<Address> selectByUid(@Param("uid") Integer uid, @Param("select") Integer select);
+
+    void resetSelect(Integer uid);
 }

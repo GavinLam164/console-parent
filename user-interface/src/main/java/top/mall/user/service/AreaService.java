@@ -12,4 +12,10 @@ public interface AreaService {
     void addAddress(Address address, String token);
 
     Map currentSelectAddress(String token);
+
+    List<Map> addressList(String token);
+
+    Map addressDetail(Integer addressId);
+
+    void setSelectAddress(String token, Integer addressId);
 }

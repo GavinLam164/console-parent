@@ -25,13 +25,16 @@
     select
     <include refid="Base_Column_List" />
     from m_user_address
-    where uid = #{uid} and `select` = 1
+    where uid = #{uid}
+    <if test="select != null">
+      and `select` = #{select}
+    </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from m_user_address
     where address_id = #{addressId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="top.mall.pojo.Address" >
+  <insert id="insert" parameterType="top.mall.pojo.Address" useGeneratedKeys="true" keyProperty="addressId">
     insert into m_user_address (address_id, uid, area_id, 
       address_detail, receiver, receiver_phone, 
       `select`)
@@ -121,5 +124,11 @@
       receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
       `select` = #{select,jdbcType=INTEGER}
     where address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+
+  <update id="resetSelect" parameterType="top.mall.pojo.Address" >
+    update m_user_address
+    set `select` = 0
+    where uid = #{uid,jdbcType=INTEGER}
   </update>
 </mapper>

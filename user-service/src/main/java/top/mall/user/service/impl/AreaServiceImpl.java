@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class AreaServiceImpl implements AreaService {
@@ -51,9 +52,15 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     public void addAddress(Address address,String token) {
-        address.setUid(getUser(token).getUid());
-        address.setSelect(1);
-        addressMapper.insert(address);
+        Integer uid = getUser(token).getUid();
+        if(address.getAddressId() == null){
+            address.setUid(uid);
+            address.setSelect(1);
+            addressMapper.insert(address);
+        }else {
+            addressMapper.updateByPrimaryKeySelective(address);
+        }
+        setSelectAddress(token, address.getAddressId());
     }
 
     public User getUser(String token) {
@@ -66,11 +73,41 @@ public class AreaServiceImpl implements AreaService {
     public Map currentSelectAddress(String token) {
         Map<String, Object> map = new HashMap<>();
         Integer uid = getUser(token).getUid();
-        Address address = addressMapper.selectByUid(uid);
+        List<Address> addresses = addressMapper.selectByUid(uid, 1);
+        if(addresses == null || addresses.size() == 0) return map;
+        Address address = addresses.get(0);
         if(address == null) return map;
+        return getAddressAndAreaMap(address);
+    }
+
+    private Map getAddressAndAreaMap(Address address) {
         Area area = areaMapper.selectByPrimaryKey(address.getAreaId());
+        Map<String, Object> map = new HashMap<>();
         map.put("address", address);
         map.put("area", area);
         return map;
+    }
+
+    @Override
+    public List<Map> addressList(String token) {
+        User user = getUser(token);
+        Integer uid = user.getUid();
+        List<Address> address = addressMapper.selectByUid(uid, null);
+        return address.stream().map(v-> getAddressAndAreaMap(v)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Map addressDetail(Integer addressId) {
+        return getAddressAndAreaMap(addressMapper.selectByPrimaryKey(addressId));
+    }
+
+    @Override
+    public void setSelectAddress(String token, Integer addressId) {
+        User user = getUser(token);
+        addressMapper.resetSelect(user.getUid());
+        Address address = new Address();
+        address.setSelect(1);
+        address.setAddressId(addressId);
+        addressMapper.updateByPrimaryKeySelective(address);
     }
 }
